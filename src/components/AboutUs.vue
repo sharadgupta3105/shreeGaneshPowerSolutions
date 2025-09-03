@@ -39,7 +39,7 @@
           <div>
             <h2 class="text-2xl font-bold tracking-tight text-[var(--primary-color)]">Our Story</h2>
             <p class="mt-4 text-gray-300">
-              Founded in 2010, Shree Ganesh Power Solutions began with a vision to make solar energy
+              Founded in 2023, Shree Ganesh Power Solutions began with a vision to make solar energy
               accessible to everyone. Over the years, we have grown from a small startup to a
               leading solar installation company, serving a wide range of clients across
               residential, commercial, and industrial sectors.
