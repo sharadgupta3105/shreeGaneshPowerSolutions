@@ -1,6 +1,6 @@
 <template>
   <main class="flex-1">
-    <section class="py-16 sm:py-24">
+    <section class="py-16 sm:py-24 relative">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-white">
@@ -11,96 +11,267 @@
             and healthcare sectors.
           </p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="group relative overflow-hidden rounded-xl shadow-lg">
+
+        <div class="relative overflow-hidden">
+          <!-- Slide Track -->
+          <div
+            class="flex transition-transform duration-700 ease-in-out"
+            :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+          >
+            <!-- Each Slide -->
             <div
-              class="w-full h-64 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2pnEllFEhVmZx-KJqKbd_F66kfeZWWM2u5zrQVSia_OKZ7mxL72AHgr3xU0ACr4BA0N41KTwcuYQfG5ej3n8l3Ajs7QbONR5EY5AqLMABf42xYjjDuC4bT7A-rQXHWkALW0uXJKAFjxhmevkQ02mNjKYMsniANtDZbT0thEiuKo9V4YMoiGFEX5UiyTAWdhA7HBex4q4MV2cwo5oCavurrs9DHxW8ucnhrnr769xt9vWtCXFXP7lOhoUMjxAysbQjC5lurDEhcpk');
-              "
-            ></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 p-6">
-              <h3 class="text-xl font-semibold text-white">Residential Installation</h3>
-              <p class="text-sm text-gray-300 mt-1">Private home, Pune</p>
+              v-for="(slide, sIndex) in slides"
+              :key="sIndex"
+              class="w-full flex-shrink-0 grid gap-6"
+              :class="{
+                'grid-cols-1': visibleCols === 1,
+                'grid-cols-2': visibleCols === 2,
+                'grid-cols-3': visibleCols === 3,
+              }"
+            >
+              <div
+                v-for="(item, index) in slide"
+                :key="index"
+                class="group relative overflow-hidden rounded-xl shadow-lg"
+              >
+                <div
+                  class="w-full h-64 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
+                  :style="{ backgroundImage: `url(${item.image})` }"
+                ></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                  <h3 class="text-xl font-semibold text-white">{{ item.title }}</h3>
+                  <p class="text-sm text-gray-300 mt-1">{{ item.subtitle }}</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="group relative overflow-hidden rounded-xl shadow-lg">
-            <div
-              class="w-full h-64 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB1BEs615_a-HJzP-S_c0fla1NrNeNSAqzVJuDkow5DKbd7UDm1RcmEOVvEK9gqxi3FV2_Qp5aFR9t9YiWdxqqYDKgRggL-DoqvrZFRsbyAJrCmHQFVmHKeeRiXtNIaNvdOWAn59x_V-04bcJFAVN1omdBtmGuFCZ0BWT3y2Csm3XYJRFfWOttqQWpzz3--41vaoqbpD9CM8NLHohh_LaSp8snk-akB2207pQBr3Lq2tSndTn_AznUzNyK0ZFTufJXjNBe-IeLfXW0');
-              "
-            ></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 p-6">
-              <h3 class="text-xl font-semibold text-white">Commercial Project</h3>
-              <p class="text-sm text-gray-300 mt-1">Office Building, Mumbai</p>
-            </div>
-          </div>
-          <div class="group relative overflow-hidden rounded-xl shadow-lg">
-            <div
-              class="w-full h-64 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBdomJbtvWZ4FLXDONEOpA7SWfLsLNH6sOioEfiXbJduB8QXDbJYVnStWl1Otz7ofEnGEVMP4B-v2KOw_Y4pyKeqccV9-ZP9JrlEL7IdiQfkCPCIb14xjq9RFsX0MfvCqDjh6zBmX-AR3ERc8wTrmoKGMtGQMYIw54OJzGFughhNnYpLRxGJPF4wc8jji3rTSf8hq3cMFBeUM0SplixJ29cQaQKjbQQ8LuKUajHwwdV_8xZ7lYaiHfZUXsbCXvp2Al46tg9hWY5FWY');
-              "
-            ></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 p-6">
-              <h3 class="text-xl font-semibold text-white">Hospital Installation</h3>
-              <p class="text-sm text-gray-300 mt-1">City Hospital, Nagpur</p>
-            </div>
-          </div>
-          <div class="group relative overflow-hidden rounded-xl shadow-lg">
-            <div
-              class="w-full h-64 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfZ8unU5q8b7hJkO05zlMadM7k6MoobDG476QdkZjPWfXyc97Dmp82TlgCTChYMix8muV6k5vxIq6uwq7NajAZLMrEuhczYk2yVQJKiGF3lsgh-dfL8O1kzfZutpuIUiDWJHV7loPsPkWwM0rvTedkOaAXKm_MVwlqJR_c1Fh4LAfYwTIZ3U5REVTnvshaYmLvz6qu8Qm_4yd0dTUuL6RbiHSKDPhr-AhNSBZTrGGZsWW-x_WtaxwlUPl7-Q20PrEVJlFbOaQne4Q');
-              "
-            ></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 p-6">
-              <h3 class="text-xl font-semibold text-white">Residential Installation</h3>
-              <p class="text-sm text-gray-300 mt-1">Modern Villa, Goa</p>
-            </div>
-          </div>
-          <div class="group relative overflow-hidden rounded-xl shadow-lg">
-            <div
-              class="w-full h-64 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBY-_96l8aAJSy8D46aTO0OGmSKw-6k12RmKglQBpi0ztxi1xCpLjImQtlaj3rHXKxRgj13EPfAbUeyy5Le2oDnIIaHEMaR8pQuvDlhTizIUyx4N5t0PxwoqjX6AjtAc4j8WDOOWoX4LklOxx650F4gwORddW2KrmTpHjIEJvxze6CND60vLai3jdR_k-vlsgFuTXhKmsJILS8jRYHmI7L88YSRcU6FIDpC_5FKb7izm7rHxm-b8Mk7PrVzgM7NL7eovEXaP4ydBD4');
-              "
-            ></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 p-6">
-              <h3 class="text-xl font-semibold text-white">Commercial Project</h3>
-              <p class="text-sm text-gray-300 mt-1">Factory Rooftop, Ahmedabad</p>
-            </div>
-          </div>
-          <div class="group relative overflow-hidden rounded-xl shadow-lg">
-            <div
-              class="w-full h-64 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfNhAMus5Cg29VxkLJPY3fHRgkaj-yKNbSEQ0Ue62QQPWkSJg0s5s0TUfG8BsQTuZWwY2d79hpODo52e72bviYE0BrMq_D3byY6bdeHez6Vm80PwtiTMtu8FnpcAW4oznSR-EIogdcsjjIc_lHmUTzefg8vdsDmcBsTBLSnAV2iUakXyf54q1h3wpluPr-bAdvT7P8H_-2HPRsV4d63eye7rcCqwOBD2bBQ8lM8Ps3uWXWn2GfQ3D8VmXrVMRV1LzRJwHYK30iXB4');
-              "
-            ></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 p-6">
-              <h3 class="text-xl font-semibold text-white">Hospital Installation</h3>
-              <p class="text-sm text-gray-300 mt-1">Community Clinic, Delhi</p>
-            </div>
-          </div>
+
+          <!-- Prev Button -->
+          <button
+            @click="prevSlide"
+            class="absolute top-1/2 left-4 -translate-y-1/2 bg-white text-black shadow-lg hover:bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full z-10"
+          >
+            ‹
+          </button>
+
+          <!-- Next Button -->
+          <button
+            @click="nextSlide"
+            class="absolute top-1/2 right-4 -translate-y-1/2 bg-white text-black shadow-lg hover:bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full z-10"
+          >
+            ›
+          </button>
         </div>
       </div>
     </section>
   </main>
 </template>
 
-<style type="text/tailwindcss">
-:root {
-  --primary-color: #38e07b;
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+
+// Helper to resolve images from assets (Vite / Vue)
+const resolveImage = (filename) => new URL(`../assets/${filename}`, import.meta.url).href
+
+// Gallery items (25 images)
+const galleryItems = [
+  {
+    image: resolveImage('1.jpg'),
+    title: 'Residential Installation',
+    subtitle: 'Private home, Pune',
+  },
+  {
+    image: resolveImage('2.jpg'),
+    title: 'Commercial Project',
+    subtitle: 'Office Building, Mumbai',
+  },
+  {
+    image: resolveImage('3.jpg'),
+    title: 'Hospital Installation',
+    subtitle: 'City Hospital, Nagpur',
+  },
+  {
+    image: resolveImage('4.jpg'),
+    title: 'Residential Installation',
+    subtitle: 'Modern Villa, Goa',
+  },
+  {
+    image: resolveImage('5.jpg'),
+    title: 'Commercial Project',
+    subtitle: 'Factory Rooftop, Ahmedabad',
+  },
+  {
+    image: resolveImage('6.jpg'),
+    title: 'Hospital Installation',
+    subtitle: 'Community Clinic, Delhi',
+  },
+  {
+    image: resolveImage('7.jpg'),
+    title: 'Residential Installation',
+    subtitle: 'Private home, Nashik',
+  },
+  {
+    image: resolveImage('8.jpg'),
+    title: 'Commercial Project',
+    subtitle: 'Shopping Mall, Hyderabad',
+  },
+  {
+    image: resolveImage('9.jpg'),
+    title: 'Hospital Installation',
+    subtitle: 'Medical Center, Jaipur',
+  },
+  {
+    image: resolveImage('10.jpg'),
+    title: 'Residential Installation',
+    subtitle: 'Farmhouse, Lonavala',
+  },
+  { image: resolveImage('11.jpg'), title: 'Commercial Project', subtitle: 'Tech Park, Bangalore' },
+  {
+    image: resolveImage('12.jpg'),
+    title: 'Hospital Installation',
+    subtitle: 'Children’s Hospital, Surat',
+  },
+  {
+    image: resolveImage('13.jpg'),
+    title: 'Residential Installation',
+    subtitle: 'Apartment Complex, Indore',
+  },
+  {
+    image: resolveImage('14.jpg'),
+    title: 'Commercial Project',
+    subtitle: 'Corporate Office, Chennai',
+  },
+  {
+    image: resolveImage('15.jpg'),
+    title: 'Hospital Installation',
+    subtitle: 'General Hospital, Lucknow',
+  },
+  {
+    image: resolveImage('16.jpg'),
+    title: 'Residential Installation',
+    subtitle: 'Bungalow, Chandigarh',
+  },
+  { image: resolveImage('17.jpg'), title: 'Commercial Project', subtitle: 'Warehouse, Kolkata' },
+  {
+    image: resolveImage('18.jpg'),
+    title: 'Hospital Installation',
+    subtitle: 'Specialty Clinic, Bhopal',
+  },
+  {
+    image: resolveImage('19.jpg'),
+    title: 'Residential Installation',
+    subtitle: 'Luxury Villa, Udaipur',
+  },
+  {
+    image: resolveImage('20.jpg'),
+    title: 'Commercial Project',
+    subtitle: 'Hotel Rooftop, Gurgaon',
+  },
+  {
+    image: resolveImage('21.jpg'),
+    title: 'Hospital Installation',
+    subtitle: 'City Hospital, Patna',
+  },
+  {
+    image: resolveImage('22.jpg'),
+    title: 'Residential Installation',
+    subtitle: 'Townhouse, Nagpur',
+  },
+  {
+    image: resolveImage('23.jpg'),
+    title: 'Commercial Project',
+    subtitle: 'Industrial Plant, Noida',
+  },
+  {
+    image: resolveImage('24.jpg'),
+    title: 'Hospital Installation',
+    subtitle: 'Care Center, Ranchi',
+  },
+  //   {
+  //     image: resolveImage('25.jpg'),
+  //     title: 'Residential Installation',
+  //     subtitle: 'Private Villa, Mysore',
+  //   },
+]
+
+// slider state
+const currentSlide = ref(0)
+const visibleCols = ref(3) // 1 (mobile), 2 (tablet), 3 (desktop)
+const rows = 2
+
+// responsive handling
+const updateCols = () => {
+  if (window.innerWidth < 640) {
+    visibleCols.value = 1
+  } else if (window.innerWidth < 1024) {
+    visibleCols.value = 2
+  } else {
+    visibleCols.value = 3
+  }
 }
-.group:hover .group-hover\:block {
-  display: block;
+
+// create slides: chunk into pages of (visibleCols * rows)
+const slides = computed(() => {
+  const perSlide = visibleCols.value * rows
+  const chunks = []
+  for (let i = 0; i < galleryItems.length; i += perSlide) {
+    chunks.push(galleryItems.slice(i, i + perSlide))
+  }
+  // if last chunk is smaller, it's fine — it will still render
+  return chunks
+})
+
+const totalSlides = computed(() => slides.value.length)
+
+// Navigation
+const nextSlide = () => {
+  if (totalSlides.value === 0) return
+  currentSlide.value = (currentSlide.value + 1) % totalSlides.value
 }
-</style>
+const prevSlide = () => {
+  if (totalSlides.value === 0) return
+  currentSlide.value = (currentSlide.value - 1 + totalSlides.value) % totalSlides.value
+}
+
+// Auto-slide interval management
+let autoInterval = null
+
+function startAutoSlide() {
+  stopAutoSlide()
+  // only start if we have more than one slide
+  if (totalSlides.value > 1) {
+    autoInterval = setInterval(() => {
+      nextSlide()
+    }, 5000)
+  }
+}
+
+function stopAutoSlide() {
+  if (autoInterval) {
+    clearInterval(autoInterval)
+    autoInterval = null
+  }
+}
+
+// Reset currentSlide if slides count decreases (prevent out-of-bounds)
+watch(slides, (newSlides) => {
+  if (currentSlide.value >= newSlides.length) {
+    currentSlide.value = 0
+  }
+  // restart auto-slide so interval timing stays consistent
+  startAutoSlide()
+})
+
+// handle resize & lifecycle
+onMounted(() => {
+  updateCols()
+  window.addEventListener('resize', updateCols)
+  startAutoSlide()
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateCols)
+  stopAutoSlide()
+})
+</script>

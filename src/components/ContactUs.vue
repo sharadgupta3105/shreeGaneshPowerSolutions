@@ -41,8 +41,8 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-white">Address</h3>
-                <p class="text-gray-400">400001, Mumbai, India</p>
-                <p class="text-gray-400">Maharashtra</p>
+                <p class="text-gray-400">Next to Hotel Ganesh, Prabhutown, Raebareli</p>
+                <p class="text-gray-400">Uttar Pradesh, 229001</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
@@ -53,8 +53,8 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-white">Business Hours</h3>
-                <p class="text-gray-400">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                <p class="text-gray-400">Saturday: 10:00 AM - 4:00 PM</p>
+                <p class="text-gray-400">Monday - Friday: 9:00 AM - 8:00 PM</p>
+                <p class="text-gray-400">Saturday: 10:00 AM - 8:00 PM</p>
                 <p class="text-gray-400">Sunday: Closed</p>
               </div>
             </div>
@@ -63,7 +63,10 @@
         <div class="flex flex-col">
           <div class="rounded-2xl bg-gray-900 p-8 shadow-2xl">
             <h2 class="text-2xl font-bold text-white mb-6">Send us a message</h2>
-            <form action="#" class="space-y-6" method="POST">
+            <form @submit.prevent="submitForm" class="space-y-6">
+              <!-- Honeypot (spam trap) -->
+              <input type="text" name="bot-field" class="hidden" tabindex="-1" autocomplete="off" />
+
               <div>
                 <label class="block text-sm font-medium text-gray-300 pb-2" for="name"
                   >Your Name</label
@@ -71,11 +74,14 @@
                 <input
                   class="form-input block w-full rounded-xl border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:border-primary-500 focus:ring-primary-500 h-14 px-4"
                   id="name"
+                  v-model="form.name"
                   name="name"
                   placeholder="Enter your name"
                   type="text"
+                  required
                 />
               </div>
+
               <div>
                 <label class="block text-sm font-medium text-gray-300 pb-2" for="email"
                   >Your Email</label
@@ -83,11 +89,14 @@
                 <input
                   class="form-input block w-full rounded-xl border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:border-primary-500 focus:ring-primary-500 h-14 px-4"
                   id="email"
+                  v-model="form.email"
                   name="email"
                   placeholder="Enter your email"
                   type="email"
+                  required
                 />
               </div>
+
               <div>
                 <label class="block text-sm font-medium text-gray-300 pb-2" for="phone"
                   >Your Phone</label
@@ -95,11 +104,13 @@
                 <input
                   class="form-input block w-full rounded-xl border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:border-primary-500 focus:ring-primary-500 h-14 px-4"
                   id="phone"
+                  v-model="form.phone"
                   name="phone"
                   placeholder="Enter your phone number"
                   type="tel"
                 />
               </div>
+
               <div>
                 <label class="block text-sm font-medium text-gray-300 pb-2" for="message"
                   >Your Message</label
@@ -107,37 +118,76 @@
                 <textarea
                   class="form-textarea block w-full rounded-xl border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:border-primary-500 focus:ring-primary-500 p-4"
                   id="message"
+                  v-model="form.message"
                   name="message"
                   placeholder="Enter your message"
                   rows="4"
+                  required
                 ></textarea>
               </div>
+
               <div>
                 <button
-                  class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[#122118] font-bold shadow-lg transition-all hover:bg-primary-500"
+                  class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[#122118] font-bold shadow-lg transition-all hover:bg-primary-500 disabled:opacity-60 disabled:cursor-not-allowed"
                   type="submit"
+                  :disabled="loading"
                 >
-                  Submit
+                  {{ loading ? 'Sending...' : 'Submit' }}
                 </button>
               </div>
+
+              <!-- Success/Error messages -->
+              <p v-if="success" class="text-green-600 text-sm pt-2">
+                ✅ Message sent successfully!
+              </p>
+              <p v-if="error" class="text-red-600 text-sm pt-2">
+                ❌ Failed to send. Try again later.
+              </p>
             </form>
           </div>
         </div>
-      </div>
-      <div class="mt-16 sm:mt-24">
-        <div
-          class="w-full h-96 rounded-2xl bg-center bg-no-repeat bg-cover object-cover shadow-2xl"
-          style="
-            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBzMoi4gGZcCUaZzr7lBBc8poo9aXxWdMlorvi3J6KQJwg5KFfJuG-Lz0JGn-RUz9o6tnRpiPQ0iQe0eNtElriePMNFYuepH4_0LeuRjwgPb8b3pvRNuC_GBbcP4TLkI9ct7Vvd917qaUVSJYYiGMpbBibpHyBP7QVuVW5SRIlS12KtpM9u9XL8T5S6opChTMUZTXDuBpqhVBd1KYezjy5eOaYPgiSgx5SoNXaTsWklxLzuib6SIACbYZnBLjE6ghIcyWTn-TzL0rc');
-          "
-        ></div>
       </div>
     </div>
   </main>
 </template>
 
-<script>
-export default {}
+<script setup>
+import { reactive, ref } from 'vue'
+import emailjs from '@emailjs/browser'
+
+const form = reactive({
+  name: '',
+  email: '',
+  phone: '',
+  message: '',
+})
+
+const loading = ref(false)
+const success = ref(false)
+const error = ref(false)
+
+const submitForm = () => {
+  loading.value = true
+  success.value = false
+  error.value = false
+
+  emailjs
+    .send(
+      'service_0s6nf6q', // <-- replace with your service ID
+      'template_keppagk', // <-- replace with your template ID
+      form,
+      'LavZxzQtEbGe--I14', // <-- replace with your public key
+    )
+    .then(() => {
+      success.value = true
+      loading.value = false
+      Object.keys(form).forEach((k) => (form[k] = '')) // reset form
+    })
+    .catch(() => {
+      error.value = true
+      loading.value = false
+    })
+}
 </script>
 
 <style type="text/tailwindcss">

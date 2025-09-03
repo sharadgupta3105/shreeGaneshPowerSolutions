@@ -5,46 +5,70 @@
     <div class="layout-container flex h-full grow flex-col">
       <header class="sticky top-0 z-50 bg-[#122118]/80 backdrop-blur-sm">
         <div
-          class="mx-auto flex max-w-7xl items-center justify-between whitespace-nowrap px-10 py-4"
+          class="mx-auto flex max-w-7xl items-center justify-between whitespace-nowrap px-6 md:px-10 py-4"
         >
-          <a class="flex items-center gap-3 text-white" href="#">
+          <!-- Logo -->
+          <a
+            class="flex items-center gap-3 text-white cursor-pointer"
+            @click="scrollToSection('top')"
+          >
             <span class="material-symbols-outlined text-3xl text-[#38e07b]">bolt</span>
-            <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">
+            <h2 class="text-white text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em]">
               Shree Ganesh Power Solutions
             </h2>
           </a>
+
+          <!-- Desktop Nav -->
           <nav class="hidden md:flex items-center gap-8">
-            <a
+            <button
+              v-for="link in links"
+              :key="link.id"
+              @click="scrollToSection(link.id)"
               class="text-gray-300 hover:text-white transition-colors text-sm font-medium leading-normal"
-              href="#"
-              >Services</a
             >
-            <a
-              class="text-gray-300 hover:text-white transition-colors text-sm font-medium leading-normal"
-              href="#"
-              >About Us</a
-            >
-            <a
-              class="text-gray-300 hover:text-white transition-colors text-sm font-medium leading-normal"
-              href="#"
-              >Gallery</a
-            >
-            <a
-              class="text-gray-300 hover:text-white transition-colors text-sm font-medium leading-normal"
-              href="#"
-              >Contact Us</a
-            >
+              {{ link.label }}
+            </button>
           </nav>
-          <a
-            class="hidden md:flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[#38e07b] hover:bg-[#32c76e] transition-colors text-[#122118] text-sm font-bold leading-normal tracking-[0.015em]"
-            href="#"
+
+          <!-- Desktop CTA -->
+          <button
+            @click="scrollToSection('contact')"
+            class="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[#38e07b] hover:bg-[#32c76e] transition-colors text-[#122118] text-sm font-bold leading-normal tracking-[0.015em]"
           >
             <span class="truncate">Get a Quote</span>
-          </a>
-          <button class="md:hidden text-white">
-            <span class="material-symbols-outlined"> menu </span>
+          </button>
+
+          <!-- Mobile Menu Button -->
+          <button
+            @click="isOpen = !isOpen"
+            class="md:hidden text-white text-3xl"
+            aria-label="Toggle Menu"
+          >
+            <span class="material-symbols-outlined">
+              {{ isOpen ? 'close' : 'menu' }}
+            </span>
           </button>
         </div>
+
+        <!-- Mobile Menu -->
+        <transition name="slide">
+          <nav v-if="isOpen" class="md:hidden bg-[#122118] px-6 py-4 flex flex-col gap-4">
+            <button
+              v-for="link in links"
+              :key="link.id"
+              @click="scrollToSection(link.id)"
+              class="text-gray-300 hover:text-white transition-colors text-base font-medium text-left"
+            >
+              {{ link.label }}
+            </button>
+            <button
+              @click="scrollToSection('contact')"
+              class="w-full text-center rounded-full bg-[#38e07b] hover:bg-[#32c76e] transition-colors text-[#122118] text-sm font-bold py-2"
+            >
+              Get a Quote
+            </button>
+          </nav>
+        </transition>
       </header>
       <main class="flex-1">
         <section
@@ -65,6 +89,7 @@
             </p>
             <div class="flex justify-center">
               <button
+                @click="scrollToSection('contact')"
                 class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-8 bg-[#38e07b] text-[#0e1a13] text-base font-bold leading-normal tracking-[0.015em] hover:bg-green-500/90 transition-colors"
               >
                 <span class="truncate">Get a Quote</span>
@@ -180,7 +205,7 @@
                 </div>
                 <a
                   class="mt-4 inline-flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 bg-[#38e07b] text-base font-bold leading-normal tracking-[0.015em] text-[#122118] transition-colors hover:bg-[#32c76e]"
-                  href="#"
+                  href="#contact"
                 >
                   <span class="truncate">Learn More &amp; Apply</span>
                 </a>
@@ -189,22 +214,22 @@
                 <img
                   alt="Solar panels on a rooftop"
                   class="h-full w-full rounded-2xl object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkE4dR9I73_ZZUM6WR-sekt5lG8Y6IY8bBCy5W3zeIPbRYRmAGuhingJe0c85zAcvgaFwgxaK38adLZtGXUsf0xdWZ2P0FepgdRyNh06Rzyw3PtfSm7O1hbrSIe4TNpv3qSnfFOTRzZ38PTgIhbQ_gLue6ZYNp-9yra9NDG5JdJBwLn8_OJ765obsNBl8CMuZBO2c89OP4TrvJGJCtBwGb0uBzUWIyADoYNYV_NTJA8JXdgKs1HQIbjhOzH2mZnpEJ5ZXRO06X3e4"
+                  src="../assets/PMsurya.jpg"
                 />
               </div>
             </div>
           </div>
         </section>
-        <section>
+        <section id="services">
           <our-services />
         </section>
-        <section>
+        <section id="about">
           <about-us />
         </section>
-        <section>
+        <section id="gallery">
           <gallery />
         </section>
-        <section>
+        <section id="contact">
           <contact-us />
         </section>
       </main>
@@ -218,22 +243,22 @@
             <nav class="flex flex-wrap items-center justify-center gap-6">
               <a
                 class="text-gray-400 hover:text-white transition-colors text-sm font-medium"
-                href="#"
+                href="#services"
                 >Services</a
               >
               <a
                 class="text-gray-400 hover:text-white transition-colors text-sm font-medium"
-                href="#"
+                href="#about"
                 >About Us</a
               >
               <a
                 class="text-gray-400 hover:text-white transition-colors text-sm font-medium"
-                href="#"
+                href="#gallery"
                 >Gallery</a
               >
               <a
                 class="text-gray-400 hover:text-white transition-colors text-sm font-medium"
-                href="#"
+                href="#contact"
                 >Contact Us</a
               >
             </nav>
@@ -252,4 +277,35 @@ import OurServices from './OurServices.vue'
 import AboutUs from './AboutUs.vue'
 import Gallery from './Gallery.vue'
 import ContactUs from './ContactUs.vue'
+import { ref } from 'vue'
+
+const isOpen = ref(false)
+
+const links = [
+  { id: 'services', label: 'Services' },
+  { id: 'about', label: 'About Us' },
+  { id: 'gallery', label: 'Gallery' },
+  { id: 'contact', label: 'Contact Us' },
+]
+
+function scrollToSection(id) {
+  const section = document.getElementById(id)
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    isOpen.value = false // close mobile menu after click
+  }
+}
 </script>
+
+<style>
+/* Slide down animation for mobile nav */
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+</style>
