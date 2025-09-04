@@ -66,6 +66,6 @@
   --primary-color: #38e07b;
 }
 .bg-gradient-radial {
-  background-image: radial-gradient(circle at top, #1a3a24, #122118);
+  background-image: radial-gradient(circle at top, #1a3a24, #213e2c);
 }
 </style>

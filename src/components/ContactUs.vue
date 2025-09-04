@@ -128,7 +128,7 @@
 
               <div>
                 <button
-                  class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[#122118] font-bold shadow-lg transition-all hover:bg-primary-500 disabled:opacity-60 disabled:cursor-not-allowed"
+                  class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[#213e2c] font-bold shadow-lg transition-all hover:bg-primary-500 disabled:opacity-60 disabled:cursor-not-allowed"
                   type="submit"
                   :disabled="loading"
                 >

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex size-full min-h-screen flex-col dark group/design-root overflow-x-hidden bg-[#122118] text-white"
+    class="relative flex size-full min-h-screen flex-col dark group/design-root overflow-x-hidden bg-[#213e2c] text-white"
     style="font-family: 'Spline Sans', 'Noto Sans', sans-serif"
   >
     <main class="flex-1">

@@ -3,7 +3,7 @@
     class="relative flex size-full min-h-screen flex-col dark group/design-root overflow-x-hidden"
   >
     <div class="layout-container flex h-full grow flex-col">
-      <header class="sticky top-0 z-50 bg-[#122118]/80 backdrop-blur-sm">
+      <header class="sticky top-0 z-50 bg-[#213e2c]/80 backdrop-blur-sm">
         <div
           class="mx-auto flex max-w-7xl items-center justify-between whitespace-nowrap px-6 md:px-10 py-4"
         >
@@ -33,7 +33,7 @@
           <!-- Desktop CTA -->
           <button
             @click="scrollToSection('contact')"
-            class="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[#38e07b] hover:bg-[#32c76e] transition-colors text-[#122118] text-sm font-bold leading-normal tracking-[0.015em]"
+            class="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[#38e07b] hover:bg-[#32c76e] transition-colors text-[#213e2c] text-sm font-bold leading-normal tracking-[0.015em]"
           >
             <span class="truncate">Get a Quote</span>
           </button>
@@ -52,7 +52,7 @@
 
         <!-- Mobile Menu -->
         <transition name="slide">
-          <nav v-if="isOpen" class="md:hidden bg-[#122118] px-6 py-4 flex flex-col gap-4">
+          <nav v-if="isOpen" class="md:hidden bg-[#213e2c] px-6 py-4 flex flex-col gap-4">
             <button
               v-for="link in links"
               :key="link.id"
@@ -63,7 +63,7 @@
             </button>
             <button
               @click="scrollToSection('contact')"
-              class="w-full text-center rounded-full bg-[#38e07b] hover:bg-[#32c76e] transition-colors text-[#122118] text-sm font-bold py-2"
+              class="w-full text-center rounded-full bg-[#38e07b] hover:bg-[#32c76e] transition-colors text-[#213e2c] text-sm font-bold py-2"
             >
               Get a Quote
             </button>
@@ -75,7 +75,7 @@
           class="relative flex min-h-[75vh] items-center justify-center bg-cover bg-center bg-no-repeat"
           style="
             background-image:
-              linear-gradient(rgba(18, 33, 24, 0.7) 0%, rgba(18, 33, 24, 1) 100%),
+              linear-gradient(rgba(0, 0, 0, 0.1) 0%, #213e2c 100%),
               url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFvMoqXnCpquinTm9RdSZzDoYBvf38jvSib_P5vxhJ57VJpgOSetwreTJ7rGbJMfNER8QsoS9l4Gq_uMGsC9Jxkd-6RnIk3gHwoTepa54_k5JdiP6_bgb8uUA7RpyitFoE83f5WiUwxChdqdarItmF_P1UpAwtMGZgWk7Z8LN1kwOIyyrAVXB_ipwD3QkCAntKYHDVyWn9MryQ33luDVxqjNNvm1GXm9Y-LFZii8tkeDtStq3T00QdHE2SH46vKL48gLhhlHQ09B8');
           "
         >
@@ -149,7 +149,7 @@
             </div>
           </div>
         </section>
-        <section class="py-20 sm:py-28 bg-[#122118]">
+        <section class="py-20 sm:py-28 bg-[#213e2c]">
           <div class="mx-auto max-w-7xl px-4 sm:px-10">
             <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
               <div class="flex flex-col items-start gap-6">
@@ -204,7 +204,7 @@
                   </div>
                 </div>
                 <a
-                  class="mt-4 inline-flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 bg-[#38e07b] text-base font-bold leading-normal tracking-[0.015em] text-[#122118] transition-colors hover:bg-[#32c76e]"
+                  class="mt-4 inline-flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 bg-[#38e07b] text-base font-bold leading-normal tracking-[0.015em] text-[#213e2c] transition-colors hover:bg-[#32c76e]"
                   href="#contact"
                 >
                   <span class="truncate">Learn More &amp; Apply</span>
