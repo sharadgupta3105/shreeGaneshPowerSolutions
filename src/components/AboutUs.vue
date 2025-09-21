@@ -57,9 +57,59 @@
           </div>
         </div>
       </div>
+      <div class="mt-20 text-center">
+        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Meet Our Team</h2>
+        <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-300">
+          The passionate individuals dedicated to bringing you the best in solar energy.
+        </p>
+      </div>
+      <div class="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="flex flex-col items-center gap-4 text-center">
+          <div
+            class="h-40 w-40 rounded-full bg-center bg-cover bg-no-repeat ring-4 ring-offset-4 ring-offset-[#122118] ring-[var(--primary-color)]"
+            :style="{ backgroundImage: `url(${saurabhImg})` }"
+          ></div>
+          <div>
+            <p class="text-lg font-bold">Saurabh Gupta</p>
+            <p class="text-sm text-[var(--primary-color)] font-medium">CEO &amp; Founder</p>
+            <p class="text-sm text-[var(--primary-color)] font-medium">
+              MBA, University of Bedfordshire, London
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-4 text-center">
+          <div
+            class="h-40 w-40 rounded-full bg-center bg-cover bg-no-repeat ring-4 ring-offset-4 ring-offset-[#122118] ring-[var(--primary-color)]"
+            :style="{ backgroundImage: `url(${shrutiImg})` }"
+          ></div>
+          <div>
+            <p class="text-lg font-bold">Shruti Gupta</p>
+            <p class="text-sm text-[var(--primary-color)] font-medium">Head of Marketing</p>
+            <p class="text-sm text-[var(--primary-color)] font-medium">MBA, Allahabad University</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-4 text-center">
+          <div
+            class="h-40 w-40 rounded-full bg-center bg-cover bg-no-repeat ring-4 ring-offset-4 ring-offset-[#122118] ring-[var(--primary-color)]"
+            :style="{ backgroundImage: `url(${sharadImg})` }"
+          ></div>
+          <div>
+            <p class="text-lg font-bold">Sharad Gupta</p>
+            <p class="text-sm text-[var(--primary-color)] font-medium">Head of Engineering</p>
+            <p class="text-sm text-[var(--primary-color)] font-medium">
+              IT, Symbiosis International University, Pune
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </template>
+<script setup>
+import sharadImg from '@/assets/sharad.jpeg'
+import saurabhImg from '@/assets/saurabh.jpg'
+import shrutiImg from '@/assets/shruti.jpg'
+</script>
 
 <style type="text/tailwindcss">
 :root {
