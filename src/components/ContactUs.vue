@@ -30,7 +30,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-white">Email</h3>
-                <p class="text-gray-400">info@shreeganeshsolar.com</p>
+                <p class="text-gray-400">info.sgpsolutions@gmail.com</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
